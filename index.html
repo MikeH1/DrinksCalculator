@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Drinks and Caloriess Calculator</title>
+  <!-- AngularJS script loading -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+  <script src="app.js"></script>
+
+</head>
+<body ng-app="defaultDrinksSelect"  ng-controller="MainController">
+<H1>Drinks and Calories Calculator</H1>
+ <!-- Drink dropdown selection Controller and form -->
+ <div>
+  <form name="myForm">
+    <label for="mySelect">What have been drinking?</label>
+    <select name="mySelect" 
+            id="mySelect"
+            ng-options="option.name for option in drinks.availableOptions track by option.id"
+            ng-model="drinks.selectedOption">
+    </select>
+  </form>
+  
+ <!-- Servings selection form -->
+ <br>
+ <label>How many glasses or servings?</label>
+  <input type="number" name="input" ng-model="serving.value"
+         min="1" max="99" ng-init="serving.value=1">
+ 
+    <p>Units of alcohol you have consumed: {{drinks.selectedOption.units * serving.value}}</p> 
+    <p>Calories consumed: {{drinks.selectedOption.calories * serving.value}}</p>  
+  </div>
+ <div>
+  <!-- Excercise selection form -->
+  <form name="excerciseForm"> 
+    <label for="excerciseSelect">This is approximately equal to {{(drinks.selectedOption.calories * serving.value) / excercises.excerciseOption.cbpm |convertToTime}} of</label> 
+    <select name="excerciseSelect" 
+            id="excerciseSelect" 
+            ng-options="eOption.name for eOption in excercises.excerciseOptions track by eOption.id" 
+            ng-model="excercises.excerciseOption">
+    </select> 
+  </form>
+    <p>Please consult your GP for more accurate and individual advice on drinking and weight loss</p>
+    <p>For further infomation please check: <a href="url"> http://www.nhs.uk/Livewell/alcohol/Pages/alcohol-units.aspx</a> </p>
+ </div>
+</body>
+</html>
+
